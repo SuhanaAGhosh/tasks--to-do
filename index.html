@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Task Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <header>
+      <h1>Student Task Planner</h1>
+      <p class="subtitle">Stay on top of your studies, one task at a time.</p>
+    </header>
+
+    <!-- Form for adding a new task -->
+    <form id="task-form" class="task-form">
+      <input type="text" id="task-input" class="task-input" placeholder="What do you need to do?" autocomplete="off" aria-label="Task" required>
+      <input type="text" id="subject-input" placeholder="Subject (e.g. Math)" autocomplete="off" aria-label="Subject" required>
+      <input type="date" id="date-input" aria-label="Due date" required>
+      <select id="priority-select" aria-label="Priority">
+        <option value="high">High</option>
+        <option value="medium" selected>Medium</option>
+        <option value="low">Low</option>
+      </select>
+      <button type="submit" class="btn-add">Add</button>
+    </form>
+
+    <p id="stats" class="stats"></p>
+
+    <ul id="task-list" class="task-list"></ul>
+    <p id="empty-message" class="empty-message">No tasks yet. Add one above!</p>
+
+    <button id="clear-btn" class="btn-clear">Clear Completed</button>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+/* Color palette used across the app */
+:root {
+  --cream: #F7F1E5;
+  --card: #FFFBF4;
+  --border: #E6D8C6;
+  --text: #3B1E22;
+  --muted: #7A5E5E;
+  --maroon: #7A1F2B;
+  --maroon-dark: #5C1420;
+  --on-maroon: #FBF5EA;
+  --high: #4A0E18;
+  --medium: #8E2A3B;
+  --low: #E9CDD1;
+  --shadow: rgba(92, 20, 32, 0.12);
+  --ease: 0.18s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 56px 16px;
+  font-family: "Times New Roman", Times, serif;
+  color: var(--text);
+  background: var(--cream);
+}
+
+/* Form controls don't inherit the font by default */
+input,
+select,
+button {
+  font-family: inherit;
+}
+
+/* Main card */
+.card {
+  width: 100%;
+  max-width: 540px;
+  padding: 32px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 12px 40px var(--shadow);
+}
+
+header {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--maroon);
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+/* Task text takes the full first row; the other fields share the second row */
+.task-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto auto;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.task-form .task-input {
+  grid-column: 1 / -1;
+}
+
+.task-form input,
+.task-form select {
+  min-width: 0;
+  padding: 11px 12px;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color var(--ease), box-shadow var(--ease);
+}
+
+.task-form input::placeholder {
+  color: var(--muted);
+}
+
+.task-form input:focus,
+.task-form select:focus {
+  border-color: var(--maroon);
+  box-shadow: 0 0 0 3px rgba(122, 31, 43, 0.15);
+}
+
+.task-form input[type="date"] {
+  color-scheme: light;
+}
+
+/* Shared button style: raised at rest, pressed in on hover and click */
+.btn-add,
+.btn-clear {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--on-maroon);
+  background: var(--maroon);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(92, 20, 32, 0.25);
+  transition: transform var(--ease), box-shadow var(--ease), background var(--ease);
+}
+
+.btn-add:hover,
+.btn-clear:hover {
+  background: var(--maroon-dark);
+  transform: translateY(2px) scale(0.98);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(92, 20, 32, 0.2);
+}
+
+.btn-add:active,
+.btn-clear:active {
+  transform: translateY(3px) scale(0.96);
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.35);
+}
+
+.btn-add:focus-visible,
+.btn-clear:focus-visible {
+  outline: 2px solid var(--maroon);
+  outline-offset: 3px;
+}
+
+.btn-add {
+  padding: 11px 22px;
+}
+
+.btn-clear {
+  width: 100%;
+  margin-top: 24px;
+  padding: 12px;
+}
+
+.stats {
+  margin-top: 22px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* Task list */
+.task-list {
+  list-style: none;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--medium);
+  border-radius: 12px;
+  box-shadow: 0 3px 10px var(--shadow);
+  animation: fadeIn 0.25s ease;
+  transition: opacity var(--ease), box-shadow var(--ease);
+}
+
+.task:hover {
+  box-shadow: 0 6px 16px var(--shadow);
+}
+
+/* Left border color matches the priority */
+.task.high { border-left-color: var(--high); }
+.task.medium { border-left-color: var(--medium); }
+.task.low { border-left-color: var(--low); }
+
+.task input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--maroon);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.task-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.task-text {
+  font-size: 1.05rem;
+  word-break: break-word;
+}
+
+/* Subject and due date line under the task text */
+.task-meta {
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.subject {
+  color: var(--maroon);
+  font-weight: 700;
+}
+
+/* Priority badges: all maroon shades */
+.badge {
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.badge.high { background: var(--high); color: var(--on-maroon); }
+.badge.medium { background: var(--medium); color: var(--on-maroon); }
+.badge.low { background: var(--low); color: var(--maroon-dark); }
+
+/* Completed tasks look faded and crossed out */
+.task.completed {
+  opacity: 0.55;
+}
+
+.task.completed .task-text {
+  text-decoration: line-through;
+}
+
+.empty-message {
+  margin: 28px 0;
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Temporary full-screen layer for the confetti burst */
+.confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Small screens: stack the form vertically */
+@media (max-width: 480px) {
+  body {
+    padding: 24px 16px;
+  }
+
+  .card {
+    padding: 22px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .task-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Turn off movement for people who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .btn-add:hover,
+  .btn-clear:hover,
+  .btn-add:active,
+  .btn-clear:active {
+    transform: none;
+  }
+}
